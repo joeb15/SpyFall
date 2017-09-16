@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spyfall 2.0</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="js/client.js"></script>
+    <style>
+        td, button{
+            height: 4ch;
+        }
+    </style>
+</head>
+<body style="padding: 0%">
+    <div id="buttons">
+        <button style="font-size:2ch;height: 16ch; width: 100%" onclick="create()">Create Game</button>
+        <button style="font-size:2ch;height: 16ch; width: 100%; position:fixed; bottom: 0%" onclick="join()">Join Game</button>
+    </div>
+    <div id="create" style="display: none">
+        <button style="font-size:2ch;height: 8ch; width: 100%" onclick="cancelCreate()">Cancel</button><br/>
+        <input style="font-size:2ch;height: 8ch; width: 100%; text-align: center" type="text" id="nickname" value="Nickname"><br/>
+        <input style="font-size:2ch;height: 8ch; width: 100%; text-align: center" type="text" id="gameID" value="GameID"><br/>
+        <button style="font-size:2ch;height: 8ch; width: 100%; position:fixed; bottom: 0%" onclick="createGame()">Create Game</button>
+    </div>
+    <div id="join" style="display: none">
+        <button style="font-size:2ch;height: 8ch; width: 100%" onclick="cancelJoin()">Cancel</button><br/>
+        <input style="font-size:2ch;height: 8ch; width: 100%; text-align: center" type="text" id="nicknamejoin" value="Nickname"><br/>
+        <input style="font-size:2ch;height: 8ch; width: 100%; text-align: center" type="text" id="gameIDjoin" value="GameID"><br/>
+        <button style="font-size:2ch;height: 8ch; width: 100%; position:fixed; bottom: 0%" onclick="joinGame()">Join Game</button>
+    </div>
+    <div id="lobby" style="display: none; height: 100%">
+        <h1 style="font-size:2ch; width: 100%; text-align: center">Player List</h1><br/>
+        <div style="width: 100%; text-align: center" id="lobbyList"></div>
+        <button style="font-size:2ch;height: 8ch; width: 100%; position:fixed; bottom: 0%" onclick="startGame()">Start Game</button>
+    </div>
+    <div id="game" style="display: none">
+        <h1 id="timer" style="text-align: center">8:00</h1>
+        <h3 onclick="showHideInfo()">Show/Hide Role</h3>
+        <div id="infoSection"></div>
+        <div id="votePrimer">
+            <button id="voteButton" style="width: 100%" onclick="castVote()">Cast a Vote</button>
+            <br/>
+        </div>
+        <div id="voteCaster" style="width:100%;display: none">
+            <p id="votedPlayer" style="width: 100%"></p>
+            <table style="width: 100%">
+                <tr style="width: 100%">
+                    <td style="width: 100%">
+                        <button height='2ch' style="width: 50%; text-align: center" onclick="voteSpy(true)">Is Spy</button>
+                        <button height='2ch' style="width: 50%; text-align: center" onclick="voteSpy(false)">Not Spy</button>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+        </div>
+        <div id="playerList"></div>
+        <br/>
+        <div id="locationList"></div>
+        <button height='2ch' style="width: 100%; text-align: center" onclick="endGame()">End Game</button>
+    </div>
+</body>
+</html>
